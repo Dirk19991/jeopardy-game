@@ -1,0 +1,13 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Swiss911';
+  src: local('Swiss911'),
+    url('./assets/fonts/Swiss911BT-Compressed.otf') format('truetype');
+}
