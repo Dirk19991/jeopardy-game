@@ -7,10 +7,12 @@ export interface Clue {
 }
 
 export interface Category {
-  data: {
-    id: number;
-    clues_count: number;
-    title: string;
-    clues: Clue[];
-  };
+  id: number;
+  clues_count: number;
+  title: string;
+  clues: Clue[];
+}
+
+export interface Response {
+  data: Category;
 }

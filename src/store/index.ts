@@ -11,9 +11,13 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import categorySlice from '../features/Grid/categorySlice';
+import questionSlice from '../features/Grid/Question/questionSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { TypedUseSelectorHook } from 'react-redux';
 
 const rootReducer = combineReducers({
   category: categorySlice,
+  question: questionSlice,
 });
 
 const persistConfig = {
@@ -41,3 +45,6 @@ export const persistor = persistStore(store);
 export default store;
 
 export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
