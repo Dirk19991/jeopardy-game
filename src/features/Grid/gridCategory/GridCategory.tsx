@@ -6,7 +6,15 @@ interface GridCategoryProps {
 
 function GridCategory({ title }: GridCategoryProps) {
   const capitalizedTitle = title?.toUpperCase();
-  return <StyledGridCategory>{capitalizedTitle}</StyledGridCategory>;
+  const hasLongWords = capitalizedTitle
+    ?.split(' ')
+    .some((elem) => elem.length >= 9);
+
+  return (
+    <StyledGridCategory hasLongWords={hasLongWords}>
+      {capitalizedTitle}
+    </StyledGridCategory>
+  );
 }
 
 export default GridCategory;

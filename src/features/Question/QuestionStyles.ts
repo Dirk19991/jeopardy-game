@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const StyledQuestion = styled.div`
+interface QuestionStylesProps {
+  length: number;
+}
+
+export const StyledQuestion = styled.div<QuestionStylesProps>`
   position: relative;
   font-family: 'Korinna';
   font-size: 4rem;
@@ -17,6 +21,6 @@ export const StyledQuestion = styled.div`
   align-items: center;
   padding: 1rem;
   @media (max-width: 1080px) {
-    font-size: 2rem;
+    font-size: ${(props) => (props.length > 100 ? '1.3rem' : '2rem')};
   }
 `;

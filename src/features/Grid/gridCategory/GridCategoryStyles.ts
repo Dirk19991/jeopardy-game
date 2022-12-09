@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const StyledGridCategory = styled.div`
+interface StyledGridCategoryProps {
+  hasLongWords?: boolean;
+}
+
+export const StyledGridCategory = styled.div<StyledGridCategoryProps>`
   font-size: 2rem;
   font-family: 'Swiss911';
   color: white;
@@ -11,6 +15,6 @@ export const StyledGridCategory = styled.div`
   cursor: pointer;
   text-align: center;
   @media (max-width: 1080px) {
-    font-size: 1.5rem;
+    font-size: ${(props) => (props.hasLongWords ? '1rem' : '1.5rem')};
   }
 `;
