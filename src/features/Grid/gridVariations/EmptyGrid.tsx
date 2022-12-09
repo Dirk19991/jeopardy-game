@@ -1,9 +1,11 @@
 import { Fragment } from 'react';
+import useMediaQuery from '../../../hooks/useMediaQuery';
 import GridCategory from '../gridCategory/GridCategory';
 import GridCell from '../gridCell/GridCell';
 
 function EmptyGrid() {
-  let emptyGridCells: number[] = Array(6).fill(0);
+  const matches = useMediaQuery('(max-width: 1080px)');
+  let emptyGridCells: number[] = matches ? Array(3).fill(0) : Array(6).fill(0);
 
   return (
     <>

@@ -16,4 +16,13 @@ export const StyledAnswerButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 1080px) {
+    width: 100px;
+    font-size: 1.1rem;
+    right: 0px;
+    left: 2px;
+
+    margin-left: 0;
+    margin-right: 0;
+  }
 `;

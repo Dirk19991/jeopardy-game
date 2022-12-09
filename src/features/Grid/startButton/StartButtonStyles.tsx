@@ -15,4 +15,7 @@ export const StyledStartButton = styled.div<StartButtonProps>`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 1080px) {
+    font-size: 2rem;
+  }
 `;

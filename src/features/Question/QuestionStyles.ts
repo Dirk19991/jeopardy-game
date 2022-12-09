@@ -15,4 +15,8 @@ export const StyledQuestion = styled.div`
   background-color: #060ce9;
   text-align: center;
   align-items: center;
+  padding: 1rem;
+  @media (max-width: 1080px) {
+    font-size: 2rem;
+  }
 `;

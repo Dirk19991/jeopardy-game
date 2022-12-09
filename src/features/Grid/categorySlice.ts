@@ -12,7 +12,7 @@ export const fetchCategories = createAsyncThunk(
     const categories: Category[] = [];
 
     while (categories.length < 6) {
-      const randomID = Math.floor(Math.random() * 1000);
+      const randomID = Math.floor(Math.random() * 27700);
 
       const response: Response = await axios.get(
         `https://jservice.io/api/category?id=${randomID}`

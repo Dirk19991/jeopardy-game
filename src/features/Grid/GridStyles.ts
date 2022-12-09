@@ -13,6 +13,6 @@ export const StyledGrid = styled.div`
   @media (max-width: 1080px) {
     border: 3px solid black;
     grid-gap: 3px;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 `;

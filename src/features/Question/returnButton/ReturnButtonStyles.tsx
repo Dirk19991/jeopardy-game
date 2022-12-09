@@ -20,4 +20,8 @@ export const StyledReturnButton = styled.div<ReturnButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 1080px) {
+    width: 100px;
+    font-size: 1.1rem;
+  }
 `;

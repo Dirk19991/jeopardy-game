@@ -31,11 +31,22 @@ export function sortValues(payload: Category): Values {
   ];
 
   const clues = payload.clues;
-  const hundred = clues.filter((elem) => elem.value === 100);
-  const twoHundred = clues.filter((elem) => elem.value === 200);
-  const threeHundred = clues.filter((elem) => elem.value === 300);
-  const fourHundred = clues.filter((elem) => elem.value === 400);
-  const fiveHundred = clues.filter((elem) => elem.value === 500);
+  const isDouble = clues.filter((elem) => elem.value === 100).length === 0;
+  const hundred = isDouble
+    ? clues.filter((elem) => elem.value === 200)
+    : clues.filter((elem) => elem.value === 100);
+  const twoHundred = isDouble
+    ? clues.filter((elem) => elem.value === 400)
+    : clues.filter((elem) => elem.value === 200);
+  const threeHundred = clues.filter(
+    (elem) => elem.value === 300 || elem.value === 600
+  );
+  const fourHundred = isDouble
+    ? clues.filter((elem) => elem.value === 800)
+    : clues.filter((elem) => elem.value === 400);
+  const fiveHundred = clues.filter(
+    (elem) => elem.value === 500 || elem.value === 1000
+  );
   values.hundred = hundred.length > 0 ? hundred : fallback;
   values.twoHundred = twoHundred.length > 0 ? twoHundred : fallback;
   values.threeHundred = threeHundred.length > 0 ? threeHundred : fallback;

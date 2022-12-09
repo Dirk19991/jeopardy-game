@@ -5,12 +5,12 @@ import { setPlayed } from '../categorySlice';
 import GridCategory from '../gridCategory/GridCategory';
 import GridCell from '../gridCell/GridCell';
 import useMediaQuery from '../../../hooks/useMediaQuery';
-import DesktopGrid from './DesktopGrid';
-import MobileGrid from './MobileGrid';
 
 function FullGrid() {
   const matches = useMediaQuery('(max-width: 1080px)');
-  let categories = useAppSelector((state) => state.category.data);
+  let categories = matches
+    ? useAppSelector((state) => state.category.data).slice(0, 3)
+    : useAppSelector((state) => state.category.data);
   const dispatch = useAppDispatch();
 
   console.log(categories);
@@ -21,9 +21,8 @@ function FullGrid() {
           <Fragment key={elem.title}>
             <GridCategory title={elem.title}></GridCategory>
             <GridCell
-              played={useAppSelector(
-                (state) => state.category.data[index].hundred.played
-              )}
+              index={index}
+              price={'hundred'}
               onClick={() => {
                 dispatch(
                   setQuestion({
@@ -38,9 +37,8 @@ function FullGrid() {
               value={100}
             />
             <GridCell
-              played={useAppSelector(
-                (state) => state.category.data[index].twoHundred.played
-              )}
+              index={index}
+              price={'twoHundred'}
               onClick={() => {
                 dispatch(
                   setQuestion({
@@ -55,9 +53,8 @@ function FullGrid() {
               value={200}
             />
             <GridCell
-              played={useAppSelector(
-                (state) => state.category.data[index].threeHundred.played
-              )}
+              index={index}
+              price={'threeHundred'}
               onClick={() => {
                 dispatch(
                   setQuestion({
@@ -72,9 +69,8 @@ function FullGrid() {
               value={300}
             />
             <GridCell
-              played={useAppSelector(
-                (state) => state.category.data[index].fourHundred.played
-              )}
+              index={index}
+              price={'fourHundred'}
               onClick={() => {
                 dispatch(
                   setQuestion({
@@ -89,9 +85,8 @@ function FullGrid() {
               value={400}
             />
             <GridCell
-              played={useAppSelector(
-                (state) => state.category.data[index].fiveHundred.played
-              )}
+              index={index}
+              price={'fiveHundred'}
               onClick={() => {
                 dispatch(
                   setQuestion({

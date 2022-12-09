@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface StyledGridCellProps {
   onClick?: () => void;
-  played?: boolean;
+  played?: boolean | string;
 }
 
 export const StyledGridCell = styled.div<StyledGridCellProps>`
