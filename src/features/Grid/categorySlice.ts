@@ -35,16 +35,43 @@ export const fetchCategories = createAsyncThunk(
 
 interface Data {
   title: string;
-  hundred: Clue;
-  twoHundred: Clue;
-  threeHundred: Clue;
-  fourHundred: Clue;
-  fiveHundred: Clue;
+  hundred: {
+    info: Clue;
+    played: boolean;
+  };
+  twoHundred: {
+    info: Clue;
+    played: boolean;
+  };
+  threeHundred: {
+    info: Clue;
+    played: boolean;
+  };
+  fourHundred: {
+    info: Clue;
+    played: boolean;
+  };
+  fiveHundred: {
+    info: Clue;
+    played: boolean;
+  };
 }
 
 interface CategoryState {
   status: 'idle' | 'loading' | 'fulfilled';
   data: Data[];
+}
+
+interface SetPlayed {
+  payload: {
+    index: number;
+    price:
+      | 'hundred'
+      | 'twoHundred'
+      | 'threeHundred'
+      | 'fourHundred'
+      | 'fiveHundred';
+  };
 }
 
 const initialState: CategoryState = {
@@ -55,7 +82,13 @@ const initialState: CategoryState = {
 const categorySlice = createSlice({
   name: 'category',
   initialState,
-  reducers: {},
+  reducers: {
+    setPlayed(state, action: SetPlayed) {
+      const index = action.payload.index;
+      const price = action.payload.price;
+      state.data[index][price].played = true;
+    },
+  },
   extraReducers(builder) {
     builder.addCase(fetchCategories.pending, (state, action) => {
       state.status = 'loading';
@@ -72,3 +105,5 @@ const categorySlice = createSlice({
 });
 
 export default categorySlice.reducer;
+
+export const { setPlayed } = categorySlice.actions;

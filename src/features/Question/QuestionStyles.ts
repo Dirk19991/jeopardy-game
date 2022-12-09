@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledQuestion = styled.div`
+  position: relative;
   font-family: 'Korinna';
   font-size: 4rem;
   display: grid;

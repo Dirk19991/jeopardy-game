@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import categorySlice from '../features/Grid/categorySlice';
-import questionSlice from '../features/Grid/Question/questionSlice';
+import questionSlice from '../features/Question/questionSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { TypedUseSelectorHook } from 'react-redux';
 
