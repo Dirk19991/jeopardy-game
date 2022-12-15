@@ -11,10 +11,12 @@
   font-family: 'Swiss911';
   src: local('Swiss911'),
     url('./assets/fonts/Swiss911BT-Compressed.otf') format('truetype');
+  font-display: block;
 }
 
 @font-face {
   font-family: 'Korinna';
   src: local('Korinna'),
     url('./assets/fonts/KorinnaStd-Regular.ttf') format('truetype');
+  font-display: block;
 }
