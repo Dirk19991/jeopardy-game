@@ -1,31 +1,54 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { sortValues } from '../../functions/sortValues';
 import { randomQuestion } from '../../functions/randomQuestion';
+import { generateRandomIDs } from '../../functions/generateRandomIds';
+
+interface SetPlayed {
+  payload: {
+    index: number;
+    price:
+      | 'hundred'
+      | 'twoHundred'
+      | 'threeHundred'
+      | 'fourHundred'
+      | 'fiveHundred';
+  };
+}
 
 export const fetchCategories = createAsyncThunk(
   'category/fetchCategories',
   async () => {
     const categories: Category[] = [];
 
-    // нужны только 6 категорий, делаем 6 запросов по случайному id категории
+    // нужны только 6 категорий, стараемся получить их в одном запросе,
+    // но если одна из категорий будет "битая", делаем еще один запрос
     while (categories.length < 6) {
-      const randomID = Math.floor(Math.random() * 5000);
+      const randomIDs = generateRandomIDs(6);
 
-      const response: Response = await axios.get(
-        `https://jservice.io/api/category?id=${randomID}`
-      );
-      const category: Category = response.data;
+      let promises: Promise<AxiosResponse<Category>>[] = [];
+      randomIDs.forEach((id) => {
+        const promise: Promise<AxiosResponse<Category>> = axios.get<Category>(
+          `https://jservice.io/api/category?id=${id}`
+        );
 
-      // отбрасываем категории, в которых недостаточно вопросов
-      if (category.clues_count >= 5) {
-        categories.push({
-          id: category.id,
-          title: category.title,
-          clues: category.clues,
-          clues_count: category.clues_count,
-        });
-      }
+        promises.push(promise);
+      });
+
+      const data2 = Promise.all([...promises]);
+      (await data2).forEach((category) => {
+        // ранний return если уже набрали 6 категорий
+
+        if (categories.length === 6) return;
+        if (category.data.clues_count >= 5) {
+          categories.push({
+            id: category.data.id,
+            title: category.data.title,
+            clues: category.data.clues,
+            clues_count: category.data.clues_count,
+          });
+        }
+      });
     }
 
     return categories;
