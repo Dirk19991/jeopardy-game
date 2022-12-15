@@ -26,7 +26,9 @@ function Grid() {
         loadStatus={loadStatus}
         onClick={() => dispatch(fetchCategories())}
       />
-      {(loadStatus === 'loading' || loadStatus === 'idle') && (
+      {(loadStatus === 'loading' ||
+        loadStatus === 'idle' ||
+        loadStatus === 'rejected') && (
         <>
           <StyledGrid>
             <EmptyGrid />

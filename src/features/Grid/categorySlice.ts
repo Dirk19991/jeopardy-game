@@ -86,6 +86,9 @@ const categorySlice = createSlice({
 
       state.data = randomizedValues;
     });
+    builder.addCase(fetchCategories.rejected, (state, action) => {
+      state.status = 'rejected';
+    });
   },
 });
 

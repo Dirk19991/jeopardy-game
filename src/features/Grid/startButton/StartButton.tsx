@@ -23,6 +23,8 @@ function StartButton({ onClick, content, loadStatus }: StartButtonProps) {
     content = 'Loading...';
   } else if (loadStatus === 'fulfilled') {
     content = 'Click to change categories';
+  } else if (loadStatus === 'rejected') {
+    content = 'Error! Try again later';
   }
   return (
     <StyledStartButton
