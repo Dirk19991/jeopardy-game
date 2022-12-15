@@ -1,5 +1,3 @@
-import { Category, Clue } from './../types/index';
-
 export interface Values {
   title: string;
   hundred: Clue[];
@@ -19,19 +17,24 @@ export function sortValues(payload: Category): Values {
     fiveHundred: [],
   };
 
+  // на то случай, если вопроса по нужной цене не оказалось, даем ему id 0,
+  // по которому позднее определяем его при рендере GridCell
   const fallback: Clue[] = [
     {
       id: 0,
       answer: '',
       category_id: 1,
-      question:
-        'Sorry, there are no questions for this category and value, please choose another question',
+      question: '',
       value: 0,
     },
   ];
 
   const clues = payload.clues;
+
+  // в базе смешаны раунды со стоимостью вопросов 100-200-300... и 200-600-800.
+  // Определяем, есть ли двойные номиналы в ответе, если да, то раунд двойной и мы ищем не только одинарные номиналы
   const isDouble = clues.filter((elem) => elem.value === 100).length === 0;
+
   const hundred = isDouble
     ? clues.filter((elem) => elem.value === 200)
     : clues.filter((elem) => elem.value === 100);

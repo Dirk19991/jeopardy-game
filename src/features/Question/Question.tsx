@@ -14,7 +14,7 @@ function Question({ question, answer }: QuestionProps) {
   const dispatch = useAppDispatch();
   const questionStatus = useAppSelector((state) => state.question.status);
   const length = question.length;
-  console.log(length);
+
   return (
     <StyledQuestion length={length}>
       {questionStatus === 'question' && question}

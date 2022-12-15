@@ -1,4 +1,3 @@
-import { Clue } from '../types';
 import { Values } from './sortValues';
 
 export function randomQuestion(values: Values[]) {

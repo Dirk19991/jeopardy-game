@@ -8,12 +8,13 @@ import useMediaQuery from '../../../hooks/useMediaQuery';
 
 function FullGrid() {
   const matches = useMediaQuery('(max-width: 1080px)');
+
+  // Если экран маленький, грузим только три темы, а не шесть
   let categories = matches
     ? useAppSelector((state) => state.category.data).slice(0, 3)
     : useAppSelector((state) => state.category.data);
   const dispatch = useAppDispatch();
 
-  console.log(categories);
   return (
     <>
       {categories.map((elem, index) => {
@@ -33,7 +34,6 @@ function FullGrid() {
                 );
                 dispatch(setPlayed({ price: 'hundred', index: index }));
               }}
-              question={elem.hundred.info.question}
               value={100}
             />
             <GridCell
@@ -49,7 +49,6 @@ function FullGrid() {
                 );
                 dispatch(setPlayed({ price: 'twoHundred', index: index }));
               }}
-              question={elem.twoHundred.info.question}
               value={200}
             />
             <GridCell
@@ -65,7 +64,6 @@ function FullGrid() {
                 );
                 dispatch(setPlayed({ price: 'threeHundred', index: index }));
               }}
-              question={elem.threeHundred.info.question}
               value={300}
             />
             <GridCell
@@ -81,7 +79,6 @@ function FullGrid() {
                 );
                 dispatch(setPlayed({ price: 'fourHundred', index: index }));
               }}
-              question={elem.fourHundred.info.question}
               value={400}
             />
             <GridCell
@@ -97,7 +94,6 @@ function FullGrid() {
                 );
                 dispatch(setPlayed({ price: 'fiveHundred', index: index }));
               }}
-              question={elem.fiveHundred.info.question}
               value={500}
             />
           </Fragment>

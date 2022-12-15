@@ -1,8 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Category, Clue } from '../../types';
-import { Response } from '../../types';
-import { Values } from '../../functions/sortValues';
 import { sortValues } from '../../functions/sortValues';
 import { randomQuestion } from '../../functions/randomQuestion';
 
@@ -11,14 +8,16 @@ export const fetchCategories = createAsyncThunk(
   async () => {
     const categories: Category[] = [];
 
+    // нужны только 6 категорий, делаем 6 запросов по случайному id категории
     while (categories.length < 6) {
-      const randomID = Math.floor(Math.random() * 27700);
+      const randomID = Math.floor(Math.random() * 5000);
 
       const response: Response = await axios.get(
         `https://jservice.io/api/category?id=${randomID}`
       );
       const category: Category = response.data;
 
+      // отбрасываем категории, в которых недостаточно вопросов
       if (category.clues_count >= 5) {
         categories.push({
           id: category.id,
@@ -32,47 +31,6 @@ export const fetchCategories = createAsyncThunk(
     return categories;
   }
 );
-
-interface Data {
-  title: string;
-  hundred: {
-    info: Clue;
-    played: boolean;
-  };
-  twoHundred: {
-    info: Clue;
-    played: boolean;
-  };
-  threeHundred: {
-    info: Clue;
-    played: boolean;
-  };
-  fourHundred: {
-    info: Clue;
-    played: boolean;
-  };
-  fiveHundred: {
-    info: Clue;
-    played: boolean;
-  };
-}
-
-interface CategoryState {
-  status: 'idle' | 'loading' | 'fulfilled';
-  data: Data[];
-}
-
-interface SetPlayed {
-  payload: {
-    index: number;
-    price:
-      | 'hundred'
-      | 'twoHundred'
-      | 'threeHundred'
-      | 'fourHundred'
-      | 'fiveHundred';
-  };
-}
 
 const initialState: CategoryState = {
   status: 'idle',
@@ -96,7 +54,11 @@ const categorySlice = createSlice({
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       state.status = 'fulfilled';
 
+      // эта функция организует данные по 6 категориям вопросов
       const values = action.payload.map((elem) => sortValues(elem));
+
+      // эта функция выбирает только 5 вопросов из категории, т.к. многие категории
+      // имеют гораздо больше вопросов
       const randomizedValues = randomQuestion(values);
 
       state.data = randomizedValues;

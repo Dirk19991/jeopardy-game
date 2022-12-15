@@ -14,7 +14,11 @@ function Grid() {
   const currentQuestion = useAppSelector(
     (state) => state.question.currentQuestion
   );
-  const currentAnswer = useAppSelector((state) => state.question.currentAnswer);
+
+  // во многих вопросах ответ написан курсивом, убираем соответствующие символы
+  const currentAnswer = useAppSelector((state) => state.question.currentAnswer)
+    .replaceAll('<i>', '')
+    .replaceAll('</i>', '');
 
   return (
     <>

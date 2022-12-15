@@ -4,6 +4,7 @@ import GridCategory from '../gridCategory/GridCategory';
 import GridCell from '../gridCell/GridCell';
 
 function EmptyGrid() {
+  // если экран маленький, заполняем только три столбца
   const matches = useMediaQuery('(max-width: 1080px)');
   let emptyGridCells: number[] = matches ? Array(3).fill(0) : Array(6).fill(0);
 

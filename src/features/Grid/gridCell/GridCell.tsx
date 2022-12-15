@@ -3,9 +3,7 @@ import { StyledGridCell } from './GridCellStyles';
 
 interface ValueProps {
   value?: number;
-  question?: string;
   onClick?: () => void;
-
   price?:
     | 'hundred'
     | 'twoHundred'
@@ -15,21 +13,24 @@ interface ValueProps {
   index?: number;
 }
 
-function GridCell({
-  value,
-  question,
-  onClick,
+function GridCell({ value, onClick, price, index }: ValueProps) {
+  let played;
+  let hide;
 
-  price,
-  index,
-}: ValueProps) {
-  let played =
-    index !== undefined && price
-      ? useAppSelector((state) => state.category.data[index][price].played)
-      : '';
+  // если вопрос уже сыгран, или вопроса не существует, затеняем его
+  if (index !== undefined && price) {
+    played = useAppSelector(
+      (state) => state.category.data[index][price].played
+    );
+    hide = useAppSelector((state) => state.category.data[index][price].info.id);
+  }
 
   return (
-    <StyledGridCell played={played} onClick={played ? () => {} : onClick}>
+    <StyledGridCell
+      played={played}
+      hide={hide}
+      onClick={played || hide === 0 ? () => {} : onClick}
+    >
       ${value}
     </StyledGridCell>
   );
