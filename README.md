@@ -22,6 +22,13 @@
 
 3. В мобильной версии игры показываются только три темы, в остальном функционал такой же:
 
-<img src="https://user-images.githubusercontent.com/104031523/208052196-036448bd-b623-4cdc-b717-1361303c3c36.jpg" alt="Alt text" title="Optional title" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/104031523/208052196-036448bd-b623-4cdc-b717-1361303c3c36.jpg" alt="Alt text" title="Optional title" width=30% height=30%>
 
+## Инструкция по установке
 
+```
+git clone https://github.com/Dirk19991/jeopardy-game.git
+cd .\jeopardy-game\
+npm install
+npm run dev
+```
