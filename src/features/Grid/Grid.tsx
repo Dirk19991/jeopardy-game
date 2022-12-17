@@ -14,7 +14,7 @@ function Grid() {
   const currentQuestion = useAppSelector(
     (state) => state.question.currentQuestion
   );
-
+  const handleFetchCategories = () => dispatch(fetchCategories());
   // во многих вопросах ответ написан курсивом, убираем соответствующие символы
   const currentAnswer = useAppSelector((state) => state.question.currentAnswer)
     .replaceAll('<i>', '')
@@ -22,10 +22,8 @@ function Grid() {
 
   return (
     <>
-      <StartButton
-        loadStatus={loadStatus}
-        onClick={() => dispatch(fetchCategories())}
-      />
+      <StartButton loadStatus={loadStatus} onClick={handleFetchCategories} />
+
       {(loadStatus === 'loading' ||
         loadStatus === 'idle' ||
         loadStatus === 'rejected') && (

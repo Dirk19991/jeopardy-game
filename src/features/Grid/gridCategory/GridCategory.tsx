@@ -6,12 +6,19 @@ interface GridCategoryProps {
 
 function GridCategory({ title }: GridCategoryProps) {
   const capitalizedTitle = title?.toUpperCase();
-  const hasLongWords = capitalizedTitle
-    ?.split(' ')
-    .some((elem) => elem.length >= 9);
+
+  // уменьшаем шрифт, если названия тем слишком длинные - для того, чтоб табло не "дергалось" часто при загрузке новых вопросов
+  let hasLongWords;
+  let hasManyWords;
+
+  if (capitalizedTitle) {
+    hasLongWords = capitalizedTitle.split(' ').some((elem) => elem.length >= 9);
+    hasManyWords = capitalizedTitle.split(' ').length > 3 ? true : false;
+  }
 
   return (
-    <StyledGridCategory hasLongWords={hasLongWords}>
+    <StyledGridCategory hasLongWords={hasLongWords} hasManyWords={hasManyWords}>
+      {' '}
       {capitalizedTitle}
     </StyledGridCategory>
   );

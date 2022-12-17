@@ -2,10 +2,13 @@ import styled from 'styled-components';
 
 interface StyledGridCategoryProps {
   hasLongWords?: boolean;
+  hasManyWords?: boolean;
 }
 
 export const StyledGridCategory = styled.div<StyledGridCategoryProps>`
-  font-size: 2rem;
+  font-size: ${(props) =>
+    props.hasLongWords || props.hasManyWords ? '1.2rem' : '1.5rem'};
+};
   font-family: 'Swiss911';
   color: white;
   display: flex;

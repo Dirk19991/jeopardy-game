@@ -15,35 +15,31 @@ function Question({ question, answer }: QuestionProps) {
   const questionStatus = useAppSelector((state) => state.question.status);
   const length = question.length;
 
+  const handleShowAnswer = () => {
+    dispatch(showAnswer());
+  };
+  const handleShowQuestion = () => {
+    dispatch(showQuestion());
+  };
+  const handleSetBoard = () => {
+    dispatch(
+      setBoard({
+        status: 'board',
+      })
+    );
+  };
+
   return (
     <StyledQuestion length={length}>
       {questionStatus === 'question' && question}
       {questionStatus === 'answer' && answer}
       {questionStatus === 'question' && (
-        <AnswerButton
-          content={'Show answer'}
-          onClick={() => {
-            dispatch(showAnswer());
-          }}
-        />
+        <AnswerButton content={'Show answer'} onClick={handleShowAnswer} />
       )}
       {questionStatus === 'answer' && (
-        <AnswerButton
-          content={'Show question'}
-          onClick={() => {
-            dispatch(showQuestion());
-          }}
-        />
+        <AnswerButton content={'Show question'} onClick={handleShowQuestion} />
       )}
-      <ReturnButton
-        onClick={() => {
-          dispatch(
-            setBoard({
-              status: 'board',
-            })
-          );
-        }}
-      />
+      <ReturnButton onClick={handleSetBoard} />
     </StyledQuestion>
   );
 }

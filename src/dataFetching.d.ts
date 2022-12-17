@@ -42,7 +42,7 @@ interface Data {
 }
 
 interface CategoryState {
-  status: 'idle' | 'loading' | 'fulfilled';
+  status: 'idle' | 'loading' | 'fulfilled' | 'rejected';
   data: Data[];
 }
 

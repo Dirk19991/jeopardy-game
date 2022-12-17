@@ -7,17 +7,16 @@ function EmptyGrid() {
   // если экран маленький, заполняем только три столбца
   const matches = useMediaQuery('(max-width: 1080px)');
   let emptyGridCells: number[] = matches ? Array(3).fill(0) : Array(6).fill(0);
+  const gridCellValues = [100, 200, 300, 400, 500];
 
   return (
     <>
       {emptyGridCells.map((elem: number, index: number) => (
         <Fragment key={index}>
           <GridCategory></GridCategory>
-          <GridCell value={100} />
-          <GridCell value={200} />
-          <GridCell value={300} />
-          <GridCell value={400} />
-          <GridCell value={500} />
+          {gridCellValues.map((cell) => (
+            <GridCell key={index + cell} value={cell} />
+          ))}
         </Fragment>
       ))}
     </>

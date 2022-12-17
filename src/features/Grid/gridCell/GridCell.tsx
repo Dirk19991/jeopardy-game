@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../../store';
 import { StyledGridCell } from './GridCellStyles';
 
-interface ValueProps {
+export interface ValueProps {
   value?: number;
   onClick?: () => void;
   price?:
